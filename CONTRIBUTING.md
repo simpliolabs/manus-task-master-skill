@@ -1,335 +1,67 @@
-# Contributing to Task Master
+# Contributing to Manus Task Master Skill
 
-Thank you for your interest in contributing to Task Master! We're excited to work with you and appreciate your help in making this project better. 🚀
+Thank you for your interest in contributing! This repo is a **fork** of [eyaltoledano/claude-task-master](https://github.com/eyaltoledano/claude-task-master) maintained by **SimplioLabs (Nir Appelton)** with a custom Manus conductor skill layer.
 
-## 🤝 Our Collaborative Approach
+## Repository Structure
 
-We're a **PR-friendly team** that values collaboration:
+| Branch | Purpose | Contributions |
+|--------|---------|---------------|
+| `main` | Upstream Task Master codebase | Synced from [eyaltoledano/claude-task-master](https://github.com/eyaltoledano/claude-task-master) — submit upstream PRs there |
+| `manus-skill` | Manus conductor skill layer | Submit PRs here for skill improvements |
 
-- ✅ **We review PRs quickly** - Usually within hours, not days
-- ✅ **We're super reactive** - Expect fast feedback and engagement
-- ✅ **We sometimes take over PRs** - If your contribution is valuable but needs cleanup, we might jump in to help finish it
-- ✅ **We're open to all contributions** - From bug fixes to major features
+## Contributing to the Manus Skill
 
-**We don't mind AI-generated code**, but we do expect you to:
+The Manus skill files live on the `manus-skill` branch under `skills/task-master/`.
 
-- ✅ **Review and understand** what the AI generated
-- ✅ **Test the code thoroughly** before submitting
-- ✅ **Ensure it's well-written** and follows our patterns
-- ❌ **Don't submit "AI slop"** - untested, unreviewed AI output
-
-> **Why this matters**: We spend significant time reviewing PRs. Help us help you by submitting quality contributions that save everyone time!
-
-## 🚀 Quick Start for Contributors
-
-### 1. Fork and Clone
+### Getting Started
 
 ```bash
-git clone https://github.com/YOUR_USERNAME/claude-task-master.git
-cd claude-task-master
-npm install
+git clone https://github.com/simpliolabs/manus-task-master-skill.git
+cd manus-task-master-skill
+git checkout manus-skill
 ```
 
-### 2. Create a Feature Branch
+### What You Can Contribute
 
-**Important**: Always target the `next` branch, not `main`:
+- **Skill improvements** — Better conductor logic, new workflow patterns, refined CLI command coverage
+- **Reference updates** — New MCP tools, updated advanced workflows, schema changes
+- **Bug fixes** — Incorrect commands, missing parameters, outdated information
+- **New references** — Additional workflow patterns, integration guides, best practices
 
-```bash
-git checkout next
-git pull origin next
-git checkout -b feature/your-feature-name
-```
+### Submitting a PR
 
-### 3. Make Your Changes
+1. Fork this repo
+2. Create a branch from `manus-skill`: `git checkout -b improve/your-change`
+3. Make your changes in `skills/task-master/`
+4. Test the skill by installing it in Manus and running real tasks
+5. Submit a PR targeting the `manus-skill` branch
 
-Follow our development guidelines below.
+### Skill File Guidelines
 
-### 4. Test Everything Yourself
+- **`SKILL.md`** must stay under 500 lines (Manus context window constraint)
+- Use **imperative/infinitive form** in instructions
+- Move detailed content to `references/` files, not into SKILL.md
+- Keep reference files under 200 lines each with a table of contents
+- Test all CLI commands before documenting them
 
-**Before submitting your PR**, ensure:
+## Contributing to Task Master Core
 
-```bash
-# Run all tests
-npm test
+For changes to the Task Master engine itself (CLI, MCP server, AI providers, core logic), submit PRs directly to the upstream repo:
 
-# Check formatting
-npm run format-check
+**[eyaltoledano/claude-task-master](https://github.com/eyaltoledano/claude-task-master)**
 
-# Fix formatting if needed
-npm run format
-```
+Follow their [contribution guidelines](https://github.com/eyaltoledano/claude-task-master/blob/main/CONTRIBUTING.md).
 
-### 5. Create a Changeset
+## Getting Help
 
-**Required for most changes**:
+- **Manus Skill issues** — [Open an issue](https://github.com/simpliolabs/manus-task-master-skill/issues) on this repo
+- **Task Master core issues** — [Open an issue](https://github.com/eyaltoledano/claude-task-master/issues) on the upstream repo
+- **Task Master community** — [Discord](https://discord.gg/taskmasterai)
 
-```bash
-npm run changeset
-```
+## License
 
-See the [Changeset Guidelines](#changeset-guidelines) below for details.
-
-### 6. Submit Your PR
-
-- Target the `next` branch
-- Write a clear description
-- Reference any related issues
-
-## 📋 Development Guidelines
-
-### Branch Strategy
-
-- **`main`**: Production-ready code
-- **`next`**: Development branch - **target this for PRs**
-- **Feature branches**: `feature/description` or `fix/description`
-
-### Code Quality Standards
-
-1. **Write tests** for new functionality
-2. **Follow existing patterns** in the codebase
-3. **Add JSDoc comments** for functions
-4. **Keep functions focused** and single-purpose
-
-### Testing Requirements
-
-Your PR **must pass all CI checks**:
-
-- ✅ **Unit tests**: `npm test`
-- ✅ **Format check**: `npm run format-check`
-
-**Test your changes locally first** - this saves review time and shows you care about quality.
-
-## 📦 Changeset Guidelines
-
-We use [Changesets](https://github.com/changesets/changesets) to manage versioning and generate changelogs.
-
-### When to Create a Changeset
-
-**Always create a changeset for**:
-
-- ✅ New features
-- ✅ Bug fixes
-- ✅ Breaking changes
-- ✅ Performance improvements
-- ✅ User-facing documentation updates
-- ✅ Dependency updates that affect functionality
-
-**Skip changesets for**:
-
-- ❌ Internal documentation only
-- ❌ Test-only changes
-- ❌ Code formatting/linting
-- ❌ Development tooling that doesn't affect users
-
-### How to Create a Changeset
-
-1. **After making your changes**:
-
-   ```bash
-   npm run changeset
-   ```
-
-2. **Choose the bump type**:
-
-   - **Major**: Breaking changes
-   - **Minor**: New features
-   - **Patch**: Bug fixes, docs, performance improvements
-
-3. **Write a clear summary**:
-
-   ```
-   Add support for custom AI models in MCP configuration
-   ```
-
-4. **Commit the changeset file** with your changes:
-   ```bash
-   git add .changeset/*.md
-   git commit -m "feat: add custom AI model support"
-   ```
-
-### Changeset vs Git Commit Messages
-
-- **Changeset summary**: User-facing, goes in CHANGELOG.md
-- **Git commit**: Developer-facing, explains the technical change
-
-Example:
-
-```bash
-# Changeset summary (user-facing)
-"Add support for custom Ollama models"
-
-# Git commit message (developer-facing)
-"feat(models): implement custom Ollama model validation
-
-- Add model validation for custom Ollama endpoints
-- Update configuration schema to support custom models
-- Add tests for new validation logic"
-```
-
-## 🔧 Development Setup
-
-### Prerequisites
-
-- Node.js 20+
-- npm or yarn
-
-### Environment Setup
-
-1. **Copy environment template**:
-
-   ```bash
-   cp .env.example .env
-   ```
-
-2. **Add your API keys** (for testing AI features):
-   ```bash
-   ANTHROPIC_API_KEY=your_key_here
-   OPENAI_API_KEY=your_key_here
-   # Add others as needed
-   ```
-
-### Running Tests
-
-```bash
-# Run all tests
-npm test
-
-# Run tests in watch mode
-npm run test:watch
-
-# Run with coverage
-npm run test:coverage
-
-# Run E2E tests
-npm run test:e2e
-```
-
-### Code Formatting
-
-We use Prettier for consistent formatting:
-
-```bash
-# Check formatting
-npm run format-check
-
-# Fix formatting
-npm run format
-```
-
-## 📝 PR Guidelines
-
-### Before Submitting
-
-- [ ] **Target the `next` branch**
-- [ ] **Test everything locally**
-- [ ] **Run the full test suite**
-- [ ] **Check code formatting**
-- [ ] **Create a changeset** (if needed)
-- [ ] **Re-read your changes** - ensure they're clean and well-thought-out
-
-### PR Description Template
-
-```markdown
-## Description
-
-Brief description of what this PR does.
-
-## Type of Change
-
-- [ ] Bug fix
-- [ ] New feature
-- [ ] Breaking change
-- [ ] Documentation update
-
-## Testing
-
-- [ ] I have tested this locally
-- [ ] All existing tests pass
-- [ ] I have added tests for new functionality
-
-## Changeset
-
-- [ ] I have created a changeset (or this change doesn't need one)
-
-## Additional Notes
-
-Any additional context or notes for reviewers.
-```
-
-### What We Look For
-
-✅ **Good PRs**:
-
-- Clear, focused changes
-- Comprehensive testing
-- Good commit messages
-- Proper changeset (when needed)
-- Self-reviewed code
-
-❌ **Avoid**:
-
-- Massive PRs that change everything
-- Untested code
-- Formatting issues
-- Missing changesets for user-facing changes
-- AI-generated code that wasn't reviewed
-
-## 🏗️ Project Structure
-
-```
-claude-task-master/
-├── bin/                    # CLI executables
-├── mcp-server/            # MCP server implementation
-├── scripts/               # Core task management logic
-├── src/                   # Shared utilities and providers and well refactored code (we are slowly moving everything here)
-├── tests/                 # Test files
-├── docs/                  # Documentation
-└── .cursor/               # Cursor IDE rules and configuration
-└── assets/							   # Assets like rules and configuration for all IDEs
-```
-
-### Key Areas for Contribution
-
-- **CLI Commands**: `scripts/modules/commands.js`
-- **MCP Tools**: `mcp-server/src/tools/`
-- **Core Logic**: `scripts/modules/task-manager/`
-- **AI Providers**: `src/ai-providers/`
-- **Tests**: `tests/`
-
-## 🐛 Reporting Issues
-
-### Bug Reports
-
-Include:
-
-- Task Master version
-- Node.js version
-- Operating system
-- Steps to reproduce
-- Expected vs actual behavior
-- Error messages/logs
-
-### Feature Requests
-
-Include:
-
-- Clear description of the feature
-- Use case/motivation
-- Proposed implementation (if you have ideas)
-- Willingness to contribute
-
-## 💬 Getting Help
-
-- **Discord**: [Join our community](https://discord.gg/taskmasterai)
-- **Issues**: [GitHub Issues](https://github.com/eyaltoledano/claude-task-master/issues)
-- **Discussions**: [GitHub Discussions](https://github.com/eyaltoledano/claude-task-master/discussions)
-
-## 📄 License
-
-By contributing, you agree that your contributions will be licensed under the same license as the project (MIT with Commons Clause).
+By contributing to the Manus skill layer, you agree that your contributions will be licensed under the same terms as the project (MIT with Commons Clause). See [LICENSE](LICENSE) for details.
 
 ---
 
-**Thank you for contributing to Task Master!** 🎉
-
-Your contributions help make AI-driven development more accessible and efficient for everyone.
+**Maintained by [SimplioLabs](https://github.com/simpliolabs) — Nir Appelton**
