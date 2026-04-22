@@ -88,18 +88,7 @@ https://github.com/simpliolabs/manus-task-master-skill
 2. In Manus, go to **Skills** → **+ Add** → **Upload a skill**
 3. Upload the `.zip` or `.skill` file
 
-### Prerequisites
-
-Once the skill is installed, Manus will handle Task Master setup automatically. You will need:
-
-- **Node.js 18+** (for the `task-master` CLI)
-- **At least one AI provider API key** (Anthropic, OpenAI, Google, or Perplexity)
-
-Task Master is installed via:
-
-```bash
-npm install -g task-master-ai
-```
+> **Zero setup required.** Manus comes with Node.js and OpenAI pre-configured. The skill automatically installs Task Master (`npm install -g task-master-ai`) on first use. Just import and go.
 
 ## Key Capabilities
 
