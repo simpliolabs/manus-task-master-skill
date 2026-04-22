@@ -72,8 +72,8 @@ skills/task-master/
 
 ### Option 1: Import from GitHub (Recommended)
 
-1. Open [Manus](https://manus.im) and go to **Skills**
-2. Click **+ Add** → **Import from GitHub**
+1. Open [Manus](https://manus.im) and go to **Settings**
+2. Click **Skills** → **+ Add** → **Import from GitHub**
 3. Paste this repository link:
 
 ```
