@@ -68,28 +68,38 @@ skills/task-master/
 | `references/advanced-workflows.md` | 158 | Tagged task lists, PRD-driven feature development, autopilot TDD, git integration patterns |
 | `references/task-structure.md` | 166 | Task JSON schema, all 6 status values, dependency management, config file formats |
 
-## Installation
+## Install This Skill on Manus
+
+### Option 1: Import from GitHub (Recommended)
+
+1. Open [Manus](https://manus.im) and go to **Skills**
+2. Click **+ Add** → **Import from GitHub**
+3. Paste this repository link:
+
+```
+https://github.com/simpliolabs/manus-task-master-skill
+```
+
+4. Done — the skill is now active and will trigger automatically on your next project
+
+### Option 2: Upload Manually
+
+1. Download the skill files from the [`manus-skill`](https://github.com/simpliolabs/manus-task-master-skill/tree/manus-skill) branch (`skills/task-master/` directory)
+2. In Manus, go to **Skills** → **+ Add** → **Upload a skill**
+3. Upload the `.zip` or `.skill` file
 
 ### Prerequisites
 
-- **Node.js 18+**
-- **At least one AI provider API key** (Anthropic, OpenAI, Google, Perplexity)
+Once the skill is installed, Manus will handle Task Master setup automatically. You will need:
 
-### Install Task Master
+- **Node.js 18+** (for the `task-master` CLI)
+- **At least one AI provider API key** (Anthropic, OpenAI, Google, or Perplexity)
+
+Task Master is installed via:
 
 ```bash
 npm install -g task-master-ai
 ```
-
-### Install the Manus Skill
-
-Add the skill to your Manus skills directory:
-
-```
-/home/ubuntu/skills/task-master/
-```
-
-Copy the contents of the [`manus-skill`](https://github.com/simpliolabs/manus-task-master-skill/tree/manus-skill) branch's `skills/task-master/` directory.
 
 ## Key Capabilities
 
