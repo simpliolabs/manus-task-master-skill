@@ -143,6 +143,41 @@ GOOGLE_API_KEY=...
 
 Configure models: `task-master models --setup` (interactive) or `task-master models --set-main=<model>`.
 
+### Manus Environment Configuration
+
+Manus sandboxes have `OPENAI_API_KEY` and `OPENAI_BASE_URL` pre-configured for the Manus LLM proxy. Taskmaster's default Anthropic provider will NOT work because no `ANTHROPIC_API_KEY` is available. You MUST configure Taskmaster to use the `openai-compatible` provider with the Manus proxy.
+
+**Step 1 — Set models to openai-compatible:**
+
+```bash
+task-master models --set-main gpt-4.1-mini --openai-compatible --baseURL https://api.manus.im/api/llm-proxy/v1
+task-master models --set-fallback gpt-4.1-nano --openai-compatible --baseURL https://api.manus.im/api/llm-proxy/v1
+```
+
+**Step 2 — Create `.env` with the correct key name:**
+
+The `openai-compatible` provider expects `OPENAI_COMPATIBLE_API_KEY` (NOT `OPENAI_API_KEY`). Add it to the project `.env`:
+
+```bash
+echo "OPENAI_COMPATIBLE_API_KEY=$OPENAI_API_KEY" >> .env
+```
+
+**Step 3 — Handle the interactive prompt (v0.43.1+):**
+
+Taskmaster v0.43.1 introduced an interactive "Parse locally" vs "Bring it to Hamster" menu in `parse-prd`. To auto-select "Parse locally" in non-interactive environments:
+
+```bash
+echo "" | task-master parse-prd .taskmaster/docs/prd.md
+```
+
+Alternatively, if running interactively, press Enter to select the default "Parse locally" option.
+
+**Supported models via Manus proxy:** `gpt-4.1-mini`, `gpt-4.1-nano`, `gemini-2.5-flash`.
+
+**Known warnings (safe to ignore):**
+- `Provider "openai-compatible" not found in MODEL_MAP. Cannot determine cost` — cost tracking is unavailable for custom providers; tasks still generate correctly.
+- `JSON response format schema is only supported with structuredOutputs` — does not affect task generation.
+
 ## References
 
 - **Full MCP tool reference (42+ tools, 3 tiers)**: See `references/mcp-tools.md` — read when using Task Master via MCP server instead of CLI
