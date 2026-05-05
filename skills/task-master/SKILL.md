@@ -83,6 +83,23 @@ Always operate on the current tag context (defaults to `master`).
 
 Setting a parent task to `done` automatically marks all subtasks as `done`.
 
+## Continuous Ingestion Protocol
+
+To match Hamster Cloud's "listening" behavior, Manus MUST proactively ingest chat context:
+
+1.  **Decision Logging**: Every time the user makes a decision in chat (e.g., "Use PostgreSQL"), Manus MUST immediately run `task-master update-task --id=<id> --prompt="User decided: [decision]"` or `task-master update --from=<id> --prompt="..."`.
+2.  **Session Sync**: At the start of every session, Manus MUST read the recent chat history and sync any missed decisions into the task list using `update-task`.
+3.  **Automatic Status**: When Manus finishes a task mentioned in chat, it MUST run `task-master set-status --id=<id> --status=done` without being asked.
+
+## Local Blueprints (Company Context)
+
+Replicate Hamster's "Blueprints" feature locally for free:
+
+1.  **Storage**: Create `.taskmaster/blueprints/` directory.
+2.  **Content**: Store `vision.md`, `strategy.md`, `personas.md`, and `brand_voice.md`.
+3.  **Usage**: When running `expand`, `parse-prd`, or `research`, Manus MUST read these files and include their context in the command prompts:
+    - `task-master expand --id=1 --prompt="Align with strategy in .taskmaster/blueprints/strategy.md"`
+
 ## Implementation Drift
 
 When the implementation diverges from the plan:
